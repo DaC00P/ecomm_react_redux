@@ -19,11 +19,6 @@ class ProductShowPage extends Component {
     }
   }
 
-  goBack() {
-    console.log(this.props)
-    this.props.history.goBack();
-  }
-
   render(){
     return(
       <div>
@@ -31,7 +26,8 @@ class ProductShowPage extends Component {
           sup
           {this.props.singleProduct.id}
         </h1>
-        <button onClick={this.goBack}>
+        <button onClick={() => this.props.history.goBack()}>
+          {/* {uses ConnectedRouter history object to go back} */}
             Go Back
         </button>
       </div>
