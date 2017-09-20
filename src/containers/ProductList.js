@@ -1,34 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
-import {fetchProducts} from '../actions/productActions';
+import { fetchProducts, fetchProduct } from '../actions/productActions';
 import ProductItem from '../components/ProductItem';
+import LoadingScreen from '../components/LoadingScreen'
+
 
 class ProductList extends Component {
   constructor(props) {
-    super(props)
-    // this.goToProduct = this.goToProduct.bind(this);
+    super(props);
+    this.goToProduct = this.goToProduct.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchProducts();
   }
 
+  goToProduct(id) {
+    //TODO is this a race condition? It is if fetchProduct is making an API call I guess?
+    this.props.fetchProduct(id);
+    this.props.history.push(`/products/${id}`);
+  }
+
   render(){
-    let { products } = this.props;
     //TODO refactor into functional loading component
+    // console.log(this.props, 'PROPS IN PRODLIST')
+    let { products } = this.props;
     if(!products){
-      return(
-        <div>
-          Loading, please wait..
-        </div>
-      );
+      return <LoadingScreen />;
     }
     else{
-      const listOfProducts = products.products.map((product) => {
+      const listOfProducts = products.map((product) => {
         return(
-          <ProductItem product={product} key={product.id}/>
+          <div key={product.name}
+               onClick={() => this.goToProduct(product.id)}
+               >
+            <ProductItem product={product}
+              key={product.id}
+            />
+          </div>
         );
       });
 
@@ -42,10 +53,12 @@ class ProductList extends Component {
 }
 
 function mapStateToProps(state) {
-  const productState = state.appData.products;
+  const productsState = state.product.products;
+  const singleProductState = state.product.product;
   return {
-      products: productState
+      products: productsState,
+      singleProduct: singleProductState
   }
 }
 
-export default connect(mapStateToProps, {fetchProducts})(ProductList)
+export default withRouter(connect(mapStateToProps, {fetchProducts, fetchProduct })(ProductList));

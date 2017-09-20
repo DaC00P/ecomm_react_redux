@@ -7,7 +7,7 @@ const landingPage = (props) => {
       <main>
         <h1> this is your app </h1>
         <button onClick={()=>{props.history.push('/testPage')}}>to the moon</button>
-        <ProductList />
+        <ProductList></ProductList>
       </main>
     </div>
   );
