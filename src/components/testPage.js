@@ -1,12 +1,12 @@
 import React from 'react';
+import FlatButton from 'material-ui/FlatButton';
 
 
 export default (props) => {
-    console.log(props);
   return(
     <div>
       <h1>TEST</h1>
-      <button onClick={()=>{props.history.push('/')}}>back to earth</button>
+      <FlatButton label="Back" primary={true} onClick={()=>{props.history.push('/')}} />
     </div>
   )
 }

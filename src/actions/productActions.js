@@ -32,9 +32,8 @@ export function fetchProduct(id){
   const product = mockProducts.filter((product) => {
     return product.id === parseInt(id, 10);
   });
-  
   return {
     type: FETCH_PRODUCT,
-    payload: product
+    payload: product[0]
   }
 };

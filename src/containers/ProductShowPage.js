@@ -4,15 +4,10 @@ import { withRouter } from 'react-router-dom';
 
 import { isEmpty } from 'lodash';
 
-// import ProductItem from '../components/ProductItem';
+import ProductItem from '../components/ProductItem';
 import { fetchProduct } from '../actions/productActions';
 
 class ProductShowPage extends Component {
-  constructor(props){
-    super(props);
-    this.goBack = this.goBack.bind(this);
-  }
-
   componentWillMount(){
     if(isEmpty(this.props.singleProduct)){
       this.props.fetchProduct(this.props.location.pathname.slice(-1));
@@ -22,10 +17,7 @@ class ProductShowPage extends Component {
   render(){
     return(
       <div>
-        <h1>
-          sup
-          {this.props.singleProduct.id}
-        </h1>
+          <ProductItem product={this.props.singleProduct} />
         <button onClick={() => this.props.history.goBack()}>
           {/* {uses ConnectedRouter history object to go back} */}
             Go Back
@@ -36,20 +28,9 @@ class ProductShowPage extends Component {
 }
 
 function mapStateToProps(state) {
-  let singleProductState;
-  if(!state.product.product){
     return {
-        singleProduct: {}
+      singleProduct: state.product.product
     }
-  }
-  else if(state.product.product.length > 0){
-    singleProductState = state.product.product[0];
-  } else{
-    singleProductState = state.product.product;
-  }
-  return {
-      singleProduct: singleProductState
-  }
 }
 
 export default withRouter(connect(mapStateToProps, { fetchProduct })(ProductShowPage));

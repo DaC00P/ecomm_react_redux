@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import {GridList, GridTile} from 'material-ui/GridList';
+
+//actions
 import { fetchProducts, fetchProduct } from '../actions/productActions';
+
+//sub-components
 import ProductItem from '../components/ProductItem';
 import LoadingScreen from '../components/LoadingScreen'
 
@@ -24,30 +29,26 @@ class ProductList extends Component {
   }
 
   render(){
-    //TODO refactor into functional loading component
-    // console.log(this.props, 'PROPS IN PRODLIST')
     let { products } = this.props;
     if(!products){
       return <LoadingScreen />;
     }
     else{
-      const listOfProducts = products.map((product) => {
-        return(
-          <div key={product.name}
-               onClick={() => this.goToProduct(product.id)}
-               >
-            <ProductItem product={product}
-              key={product.id}
-            />
-          </div>
-        );
-      });
-
       return(
-        <ul>
-          {listOfProducts}
-        </ul>
-      )
+        <GridList>
+          {products.map((product) => {
+            return(
+              <GridTile key={product.name}
+                onClick={() => this.goToProduct(product.id)}
+                >
+                  <ProductItem product={product}
+                    key={product.id}
+                  />
+              </GridTile>
+              )
+            })}
+          </GridList>
+      );
     }
   };
 }

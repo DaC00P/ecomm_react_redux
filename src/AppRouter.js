@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch} from 'react-router-dom';
 import createHashHistory from 'history/createHashHistory';
 import { ConnectedRouter } from 'react-router-redux'
-// import { connect } from 'react-redux';
+
 
 import './AppRouter.css';
 import LandingPage from './containers/landingPage';
@@ -12,6 +12,7 @@ import ProductList from './containers/ProductList';
 
 const history = createHashHistory();
 
+//TODO refactor into functional component
 class App extends Component {
   render() {
     return (

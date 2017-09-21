@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default (props) => {
-  // console.log(props)
   const { product } = props;
   return (
         <ul>
