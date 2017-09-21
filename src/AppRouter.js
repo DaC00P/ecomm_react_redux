@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'react-router-redux'
 
 import './AppRouter.css';
 import LandingPage from './containers/landingPage';
-import testPage from './components/testPage';
+// import testPage from './components/testPage';
 import ProductShowPage from './containers/ProductShowPage';
 import ProductList from './containers/ProductList';
 
@@ -19,7 +19,6 @@ class App extends Component {
       <ConnectedRouter history={history}>
         <Switch>
           {/* {all other routes go above root rout} */}
-          <Route exact path="/testPage" component={testPage}/>
           <Route exact path="/products" component={ProductList} />
           <Route exact path="/products/:id" component={ProductShowPage} />
           <Route exact path="/" component={LandingPage}/>
