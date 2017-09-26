@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import MuiAppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 
-export default class AppShell extends Component {
+import AppSideBar from './AppSideBar';
+
+class AppShell extends Component {
   constructor(props) {
       super(props);
       this.state = {open: false};
@@ -20,25 +21,28 @@ export default class AppShell extends Component {
   render(){
     return(
       <div className='mainContainer'>
-        <AppBar
+        <MuiAppBar
           title="Give us your Monies"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
           showMenuIconButton={false}
           iconElementRight={<FlatButton label="Toggle Cart" onClick={this.handleToggle} />}
         />
-        <div className='sidebar'>
-          <Drawer open={this.state.open} openSecondary={true}>
-            <RaisedButton
-              label="Toggle Cart"
-              onClick={this.handleToggle}
-            />
-            {/* //TODO, map over the cart state and render productItems inside of MenuItems */}
-            <MenuItem>Product</MenuItem>
-            <MenuItem>Product 2</MenuItem>
-          </Drawer>
-        </div>
-          {this.props.children}
+        <AppSideBar
+          handleToggle={this.handleToggle}
+          open={this.state.open}
+        />
+        {this.props.children}
       </div>
       );
   }
 }
+
+function mapStateToProps(state) {
+  const productsState = state.product.products;
+  //TODO add cart to reducers so we can get the state here.
+  // const cartState = state.cart.products
+  return {
+      products: productsState
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(AppShell));

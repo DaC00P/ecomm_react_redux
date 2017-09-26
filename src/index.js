@@ -5,6 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk';
+import { ConnectedRouter } from 'react-router-redux'
 
 //injectTapEventPlugin required for material-ui to work for now
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -29,6 +30,7 @@ import './index.css';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory()
+
 // Build the middleware for intercepting and dispatching navigation actions
 const middleware = routerMiddleware(history)
 // Add the reducer to your store on the `router` key
@@ -42,14 +44,16 @@ injectTapEventPlugin();
 
 document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(
-    <Provider store={store}>
+    (<Provider store={store}>
       <MuiThemeProvider>
-        <AppShell>
-          <AppRouter />
-        </AppShell>
+        <ConnectedRouter history={history}>
+          <AppShell>
+            <AppRouter />
+          </AppShell>
+        </ConnectedRouter>
       </MuiThemeProvider>
-    </Provider>,
-     document.getElementById('root'));
+    </Provider>),
+  document.getElementById('root'));
 });
 
 registerServiceWorker();

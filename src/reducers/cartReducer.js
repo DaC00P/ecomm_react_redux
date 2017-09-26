@@ -1,0 +1,22 @@
+import { ADD_TO_CART, REMOVE_FROM_CART} from '../actions/actionTypes';
+// import { mockProducts } from '../data/mockData';
+
+const INITIAL_STATE = {cart: []};
+
+//Cart state will be kept in a list of IDs, separate from productState.
+export default function (state = INITIAL_STATE, action) {
+  switch (action.type) {
+    //is this a necessary case? left here for question
+    // case FETCH_CART:
+    //   const newProductsState = {...state, cart: action.payload};
+    //   return newProductsState;
+    case ADD_TO_CART:
+      const addedCartState = [...state, action.payload];
+      return addedCartState;
+    case REMOVE_FROM_CART:
+      const removedCartState = [action.payload, ...state];
+      return removedCartState;
+    default:
+      return state;
+  }
+}
