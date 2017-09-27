@@ -12,7 +12,6 @@ import { addToCart, removeFromCart } from '../actions/CartActions';
 class ProductShowPage extends Component {
   constructor(props){
     super(props);
-    this.state = {action: ''}
     this.cartAction = this.cartAction.bind(this);
     this.cartActionCheck = this.cartActionCheck.bind(this);
   }
@@ -23,15 +22,19 @@ class ProductShowPage extends Component {
     }
   }
 
+  //Is there any way to combine these? I don't think so..
   componentDidMount(){
+    this.cartActionCheck();
+  }
+  componentWillReceiveProps(nextProps){
     this.cartActionCheck();
   }
 
   cartActionCheck(){
     if(this.props.cart.includes(this.props.singleProduct.id)){
-      this.setState({action: 'Remove from Cart'});
+      return 'Remove from Cart';
     } else{
-      this.setState({action: 'Add to Cart'});
+      return 'Add to Cart';
     }
   }
 
@@ -50,7 +53,7 @@ class ProductShowPage extends Component {
         <ChangeCartButton
           id={this.props.singleProduct.id}
           cartAction={this.cartAction}
-          cartActionVerb={this.state.action}
+          cartActionVerb={this.cartActionCheck()}
         />
         <button onClick={() => this.props.history.goBack()}>
           {/* {uses ConnectedRouter history object to go back} */}
@@ -64,7 +67,7 @@ class ProductShowPage extends Component {
 function mapStateToProps(state) {
     return {
       singleProduct: state.product.product,
-      cart: state.cart.cart
+      cart: state.cart
     }
 }
 
