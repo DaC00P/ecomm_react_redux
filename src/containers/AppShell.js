@@ -38,8 +38,6 @@ class AppShell extends Component {
 
 function mapStateToProps(state) {
   const productsState = state.product.products;
-  //TODO add cart to reducers so we can get the state here.
-  // const cartState = state.cart.products
   return {
       products: productsState
   }

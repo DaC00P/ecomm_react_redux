@@ -2,7 +2,8 @@ import React from 'react';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+
+import ShoppingCart from '../components/ShoppingCart';
 
 export default (props) => {
   return(
@@ -11,11 +12,11 @@ export default (props) => {
         <RaisedButton
           label="Toggle Cart"
           onClick={props.handleToggle}
+          style={{'display': 'block'}}
+          // should probably use real css?
         />
-        {/* //TODO, map over the cart state and render productItems inside of MenuItems */}
-        <MenuItem>Product</MenuItem>
-        <MenuItem>Product 2</MenuItem>
+        <ShoppingCart />
       </Drawer>
     </div>
-  );
-}
+  )
+};

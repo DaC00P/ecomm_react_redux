@@ -13,10 +13,9 @@ export default function (state = INITIAL_STATE, action) {
       // return newProductsState;
     case ADD_TO_CART:
       const addedCartState = [...state, action.payload];
-      console.log('addedCartState', addedCartState)
       return addedCartState;
     case REMOVE_FROM_CART:
-      const removedCartState = state.filter((id)=>{
+      const removedCartState = state.filter((id) => {
         return (id !== action.payload)
       });
       return removedCartState;

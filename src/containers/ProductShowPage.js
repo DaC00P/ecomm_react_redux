@@ -13,7 +13,6 @@ class ProductShowPage extends Component {
   constructor(props){
     super(props);
     this.cartAction = this.cartAction.bind(this);
-    this.cartActionCheck = this.cartActionCheck.bind(this);
   }
 
   componentWillMount(){
@@ -22,27 +21,13 @@ class ProductShowPage extends Component {
     }
   }
 
-  //Is there any way to combine these? I don't think so..
-  componentDidMount(){
-    this.cartActionCheck();
-  }
-  componentWillReceiveProps(nextProps){
-    this.cartActionCheck();
-  }
-
-  cartActionCheck(){
-    if(this.props.cart.includes(this.props.singleProduct.id)){
-      return 'Remove from Cart';
-    } else{
-      return 'Add to Cart';
-    }
-  }
-
+  //NOTE Bad idea?
   cartAction(){
-    if(this.props.cart.includes(this.props.singleProduct.id)){
-      return this.props.removeFromCart.bind(this)
+    const id = this.props.singleProduct.id;
+    if(this.props.cart.includes(id)){
+      this.props.removeFromCart(id)
     } else{
-      return this.props.addToCart.bind(this)
+      this.props.addToCart(id)
     }
   }
 
@@ -50,11 +35,20 @@ class ProductShowPage extends Component {
     return(
       <div>
         <ProductItem product={this.props.singleProduct} />
-        <ChangeCartButton
-          id={this.props.singleProduct.id}
-          cartAction={this.cartAction}
-          cartActionVerb={this.cartActionCheck()}
-        />
+        {/* //gross, ternary */}
+        {
+          this.props.cart.includes(this.props.singleProduct.id)
+          ? (<ChangeCartButton
+              id={this.props.singleProduct.id}
+              cartAction={this.cartAction}
+              cartActionVerb="Remove from Cart"
+            />)
+          : (<ChangeCartButton
+              id={this.props.singleProduct.id}
+              cartAction={this.cartAction}
+              cartActionVerb="Add to Cart"
+            />)
+          }
         <button onClick={() => this.props.history.goBack()}>
           {/* {uses ConnectedRouter history object to go back} */}
             Go Back
