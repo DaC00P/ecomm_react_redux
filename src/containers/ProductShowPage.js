@@ -10,19 +10,13 @@ import { fetchProduct } from '../actions/productActions';
 import { addToCart, removeFromCart } from '../actions/CartActions';
 
 class ProductShowPage extends Component {
-  constructor(props){
-    super(props);
-    this.cartAction = this.cartAction.bind(this);
-  }
-
   componentWillMount(){
     if(isEmpty(this.props.singleProduct)){
       this.props.fetchProduct(this.props.location.pathname.slice(-1));
     }
   }
 
-  //NOTE Bad idea?
-  cartAction(){
+  cartAction = () => {
     const id = this.props.singleProduct.id;
     if(this.props.cart.includes(id)){
       this.props.removeFromCart(id)

@@ -15,7 +15,6 @@ export default class AppSideBar extends Component {
               onClick={this.props.handleToggle}
               style={{'display': 'block'}}
               children="Toggle Cart"
-              // should probably use real css?
             />
             <ShoppingCart />
         </Drawer>

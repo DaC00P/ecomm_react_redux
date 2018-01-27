@@ -12,7 +12,7 @@ export default (props) =>  {
         <Switch>
           <Route exact path="/products" component={ProductList} />
           <Route exact path="/products/:id" component={ProductShowPage} />
-          <Route exact path="/" component={LandingPage}/>
+          <Route path="/" component={LandingPage}/>
         </Switch>
     );
 };
