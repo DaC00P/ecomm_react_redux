@@ -6,6 +6,7 @@ const INITIAL_STATE = [];
 //Cart state will be kept in a list of IDs, separate from productState.
 export default function (state = INITIAL_STATE, action) {
   // console.log('CART REDUCER', state);
+  console.log('AKSHUN', action)
   switch (action.type) {
     //is this a necessary case? left here for question
     // case FETCH_CART:

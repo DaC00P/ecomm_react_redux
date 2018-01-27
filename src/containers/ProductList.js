@@ -41,7 +41,8 @@ class ProductList extends Component {
               <GridListTile key={product.name}
                 onClick={() => this.goToProduct(product.id)}
                 >
-                  <ProductItem product={product}
+                  <ProductItem 
+                    product={product}
                     key={product.id}
                   />
               </GridListTile>

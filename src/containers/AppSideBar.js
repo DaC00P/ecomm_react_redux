@@ -11,10 +11,10 @@ export default class AppSideBar extends Component {
       <div className='sidebar'>
           <Drawer open={this.props.open} onClose={this.props.handleToggle}>
             <Button
-              label="Toggle Cart1"
+              label="Toggle Cart"
               onClick={this.props.handleToggle}
               style={{'display': 'block'}}
-              children="Toggle Cart1"
+              children="Toggle Cart"
               // should probably use real css?
             />
             <ShoppingCart />

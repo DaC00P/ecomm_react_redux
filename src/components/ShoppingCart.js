@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { findKey } from 'lodash';
+import { find } from 'lodash';
 
 // import {MenuItem} from 'material-ui/Menu';
 import ProductItem from './ProductItem';
@@ -33,15 +33,20 @@ class ShoppingCart extends Component {
     return this.props.cart.map((cartItemId) => {
       if(!this.props.productIds.includes(cartItemId)){
         return(
-          <LoadingScreen key={cartItemId}/>
+          <LoadingScreen
+            key={cartItemId}
+            text={cartItemId}
+          />
         )
       }
       else {
-        const product = findKey(this.props.products, function(product){
+        const product = find(this.props.products, function(product){
           if(product.id === cartItemId){
+            console.log('PRODUKT', product)
             return product
           };
         });
+
         return(
           <ProductItem product={product} key={product.id}/>
         )
