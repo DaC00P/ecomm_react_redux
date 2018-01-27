@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import {GridList, GridTile} from 'material-ui/GridList';
+import GridList, {GridListTile} from 'material-ui/GridList';
 
 //actions
 import { fetchProducts, fetchProduct } from '../actions/productActions';
@@ -31,20 +31,20 @@ class ProductList extends Component {
   render(){
     let { products } = this.props;
     if(!products){
-      return <LoadingScreen />;
+      return  <LoadingScreen />;
     }
     else{
       return(
         <GridList>
           {products.map((product) => {
             return(
-              <GridTile key={product.name}
+              <GridListTile key={product.name}
                 onClick={() => this.goToProduct(product.id)}
                 >
                   <ProductItem product={product}
                     key={product.id}
                   />
-              </GridTile>
+              </GridListTile>
               )
             })}
           </GridList>

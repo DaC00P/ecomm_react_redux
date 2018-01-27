@@ -3,18 +3,14 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import MuiAppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
+import { Button } from 'material-ui';
 
 import AppSideBar from './AppSideBar';
 
 class AppShell extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {open: false};
-      this.handleToggle = this.handleToggle.bind(this)
-  }
+  state = {open: false};
 
-  handleToggle(){
+  handleToggle = () => {
     this.setState({open: !this.state.open});
   }
 
@@ -23,12 +19,15 @@ class AppShell extends Component {
       <div className='mainContainer'>
         <MuiAppBar
           title="Give us your Monies"
-          showMenuIconButton={false}
-          iconElementRight={<FlatButton label="Toggle Cart" onClick={this.handleToggle} />}
+          children={<Button 
+                      label="Toggle Cart"
+                      onClick={this.handleToggle} 
+                      children="Toggle Cart"
+                    />}
         />
         <AppSideBar
-          handleToggle={this.handleToggle}
           open={this.state.open}
+          handleToggle={this.handleToggle}
         />
         {this.props.children}
       </div>

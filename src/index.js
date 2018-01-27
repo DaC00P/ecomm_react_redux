@@ -9,8 +9,6 @@ import { ConnectedRouter } from 'react-router-redux'
 
 //injectTapEventPlugin required for material-ui to work for now
 import injectTapEventPlugin from 'react-tap-event-plugin';
-//gotta wrap app in MuiThemeProvider for mui to hook in
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 //required for the connectedRouter to work properly
 import createHistory from 'history/createBrowserHistory'
@@ -45,13 +43,11 @@ injectTapEventPlugin();
 document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(
     (<Provider store={store}>
-      <MuiThemeProvider>
         <ConnectedRouter history={history}>
           <AppShell>
             <AppRouter />
           </AppShell>
         </ConnectedRouter>
-      </MuiThemeProvider>
     </Provider>),
   document.getElementById('root'));
 });

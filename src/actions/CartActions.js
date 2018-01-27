@@ -1,5 +1,5 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from './actionTypes';
-import { mockProducts } from '../data/mockData';
+// import { mockProducts } from '../data/mockData';
 
 export function addToCart(id){
   // console.log(id)

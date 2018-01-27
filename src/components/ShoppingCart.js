@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { findKey } from 'lodash';
 
-import MenuItem from 'material-ui/MenuItem';
+// import {MenuItem} from 'material-ui/Menu';
 import ProductItem from './ProductItem';
 import LoadingScreen from './LoadingScreen';
 
@@ -24,7 +24,6 @@ class ShoppingCart extends Component {
   //this is really inefficient. Build this better.
   // Shouldn't have to re-map completely every time we re render if we know what action was just taken?
   renderCart = () => {
-    console.log(this.props.cart)
     if(this.props.cart.length === 0){
       return (
         <LoadingScreen text="Please Add Products!" />
@@ -43,7 +42,6 @@ class ShoppingCart extends Component {
             return product
           };
         });
-        console.log('PRODUCT OBJ', product);
         return(
           <ProductItem product={product} key={product.id}/>
         )
@@ -52,7 +50,6 @@ class ShoppingCart extends Component {
   }
 
   render(){
-    console.log(this.props, 'PROPSSSS in SCSCSCCSCSC')
     return(
       <ul>
         {this.renderCart()}
